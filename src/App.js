@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from 'react'
 
-function App() {
+export default function App() {
+  const [count, setCount]= useState(0)
+  const [disabled, setDisabled]= useState(false)
+  const incrementhandler=()=>{
+    setCount(count => count+1)
+  }
+  const decrementhandler=()=>{
+    setCount(count=>count-1)
+  }
+  let myStyle={
+    color: "green"
+  }
+  if(count>=5 && count<=9){
+    myStyle ={
+      color: "blue"
+    }
+  }
+  if(count===10){
+    myStyle={
+      color: "red"
+    }
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1 style={myStyle}>Counter</h1>
+      <button onClick={incrementhandler} disabled={count >9 ? true : false}>Increment</button>
+      <h1>{count}</h1>
+      <button onClick={decrementhandler} disabled={count<1 ? true: false }>decrement</button>
     </div>
-  );
+  )
 }
-
-export default App;
